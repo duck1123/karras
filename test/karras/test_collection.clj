@@ -221,7 +221,7 @@
   (:timing results) => not-nil?
   (:timeMillis results) => not-nil?
   (:result results) => not-nil?
-  (fetch-map-reduce-values results) => [{:value 4.0}]
+  (first (fetch-map-reduce-values results)) => (contains {:value 4.0})
   (fetch-map-reduce-values results (where (eq :values 3))) => empty?
   (against-background
     (around :facts
