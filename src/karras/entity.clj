@@ -18,7 +18,6 @@ Example:
   karras.entity
   (:require [karras.collection :as c])
   (:use karras.sugar
-        [clojure.contrib.def :only [defnk defalias defvar]]
         [clojure.contrib.str-utils2 :only [lower-case]]
         inflections.core))
 
@@ -314,10 +313,11 @@ Example:
   [map-reduce-result & fetch-options]
   (apply c/fetch-map-reduce-values map-reduce-result fetch-options))
 
-(defvar map-reduce-fetch-all (comp fetch-map-reduce-values map-reduce)
-  "Composes map-reduce and fetch-map-reduce-values and returns all the results.
+(def
+  ^{:doc "Composes map-reduce and fetch-map-reduce-values and returns all the results.
    If you need to filter the results use:
-     (fetch-map-reduce-values (map-reduce ...) ...your fetch options...")
+     (fetch-map-reduce-values (map-reduce ...) ...your fetch options..."}
+  map-reduce-fetch-all (comp fetch-map-reduce-values map-reduce))
 
 (defn index
   "Associate an index with a give type."
