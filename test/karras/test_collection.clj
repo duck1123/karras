@@ -218,15 +218,14 @@
 
 (fact "map-reduce:simple counting" (:ok results) => 1.0
   (:counts results) => {:output 1, :emit 4, :input 4}
-  (:timing results) => not-nil?
-  (:timeMillis results) => not-nil?
-  (:result results) => not-nil?
+  (:timing results) =not=> nil?
+  (:timeMillis results) =not=> nil?
+  (:result results) =not=> nil?
   (first (fetch-map-reduce-values results)) => (contains {:value 4.0})
   (fetch-map-reduce-values results (where (eq :values 3))) => empty?
   (against-background
     (around :facts
-            (let [not-nil? (comp not nil?)
-                  results (map-reduce people
+            (let [results (map-reduce people
                                       "function() {emit(this.last_name, 1)}"
                                       "function(k,vals) {
                                         var sum=0;
